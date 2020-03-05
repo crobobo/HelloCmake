@@ -50,20 +50,20 @@ message(FATAL_ERROR "message error(stop)")
 
 ```cmake
 # 变量定义
-SET(USER_KEY "Hello")
-MESSAGE("USER_KEY = ${USER_KEY};")
+set(USER_KEY "Hello")
+message("USER_KEY = ${USER_KEY};")
 
-# 变量内容追加（SET）
-SET(USER_KEY ${USER_KEY} "First")
-MESSAGE("USER_KEY = ${USER_KEY};")
+# 变量内容追加（set）
+set(USER_KEY ${USER_KEY} "First")
+message("USER_KEY = ${USER_KEY};")
 
-# 变量内容追加（LIST）
-LIST(APPEND USER_KEY "Second")
-MESSAGE("USER_KEY = ${USER_KEY};")
+# 变量内容追加（list）
+list(APPEND USER_KEY "Second")
+message("USER_KEY = ${USER_KEY};")
 
 # 删除变量的值
-LIST(REMOVE_ITEM USER_KEY "First")
-MESSAGE("USER_KEY = ${USER_KEY};")
+list(REMOVE_ITEM USER_KEY "First")
+message("USER_KEY = ${USER_KEY};")
 ```
 
 ## 特殊变量
