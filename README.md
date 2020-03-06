@@ -1,16 +1,39 @@
 # HelloCmake
 
->[Tutorial](https://cmake.org/cmake/help/latest/guide/tutorial/index.html)
+>[官方教程](https://cmake.org/cmake/help/latest/guide/tutorial/index.html)
 
-## 环境准备
+## 命令行参数
 
-- [Cmake](https://cmake.org/download/)
-- [Cygwin](https://cygwin.com/install.html)：gcc-g++、make、cmake、gdb
-- [Mingw-w64](https://sourceforge.net/projects/mingw-w64/files/mingw-w64/)
+```
+Options
+  -S <path-to-source>          = 指定目录：源文件位置（CMakeLists.txt在此目录内）
+  -B <path-to-build>           = 指定目录：构建文件的生成位置
+  -D <var>[:<type>]=<value>    = 指定宏变量
+  -G <generator-name>          = 指定构建器
+  -A <platform-name>           = 指定平台
+  -E                           = 命令行模式
+```
 
 ## Hello
 
-新建`CMakeLists.txt`文件
+### Tree
+
+- Project Directory
+  - `CMakeLists.txt`
+  - `main.c`
+
+### `main.c`
+
+```c
+#include <stdio.h>
+
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}
+```
+
+### `CMakeLists.txt`
 
 ```cmake
 # cmake版本要求
@@ -23,14 +46,30 @@ set(CMAKE_C_STANDARD 99)
 project(HelloCmakeProject)
 
 # 执行文件
-add_executable(HelloCmakeProject main.c)
+add_executable(Hello main.c)
 ```
 
+### Build
+
+#### 方案一：[Cygwin](https://cygwin.com/install.html)
+
+>添加包：gcc-g++、make、cmake、gdb
+>添加环境：`..\Cygwin\bin`
+
 ```bash
-# bash
-cmake -G "CodeBlocks - Unix Makefiles" -B build
-cd build
-make
+cmake -G "CodeBlocks - Unix Makefiles" -B build-cygwin -S .
+pushd build-cygwin; make; ./Hello; popd
+# 必须在Cygwin环境下运行
+```
+
+#### 方案二：[Mingw-w64](https://sourceforge.net/projects/mingw-w64/files/mingw-w64/)、[CMake](https://cmake.org/download/)（推荐）
+
+>添加环境：`..\mingw-w64\x86_64-${version}-posix-seh-${subversion}\mingw64\bin`
+>添加环境：`..\cmake\cmake-${version}-win64-x64\bin`
+
+```batch
+cmake -G "CodeBlocks - MinGW Makefiles" -B build-mingw -S .
+pushd build-mingw && mingw32-make && .\Hello.exe && popd
 ```
 
 ## 变量
@@ -209,6 +248,8 @@ endif ()
 
 ### 高级条件
 
+#### 逻辑运算
+
 ```cmake
 # 与或非
 if (1 AND 1)
@@ -220,7 +261,11 @@ endif ()
 if (NOT 0)
     message("1 not")
 endif ()
+```
 
+#### 存在性判断
+
+```cmake
 # 变量是否定义
 set(DEFINED_VARIABLE 0)
 if (DEFINED DEFINED_VARIABLE)
@@ -238,7 +283,11 @@ endif ()
 if (COMMAND set)
     message("1 set")
 endif()
+```
 
+#### 文件系统判断
+
+```cmake
 # 文件或目录是否存在
 if (EXISTS "C:\\Windows\\notepad.exe")
     message("1 exist")
@@ -255,7 +304,11 @@ if ("C:\\Windows\\notepad.exe" IS_NEWER_THAN "C:\\Windows\\notepad2.cmd")
 else()
     message("2 newer")
 endif()
+```
 
+#### 值比较
+
+```cmake
 # 数字大小比较
 if(123 EQUAL 123)
     message("1 equal")
