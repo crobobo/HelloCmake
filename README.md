@@ -1,4 +1,4 @@
-# HelloCmake
+# HelloCMake
 
 >[官方教程](https://cmake.org/cmake/help/latest/guide/tutorial/index.html)
 
@@ -53,8 +53,8 @@ add_executable(Hello main.c)
 
 #### 方案一：[Cygwin](https://cygwin.com/install.html)
 
->添加包：gcc-g++、make、cmake、gdb
->添加环境：`..\Cygwin\bin`
+>- 添加包：gcc-g++、make、cmake、gdb
+>- 添加环境：`..\Cygwin\bin`
 
 ```bash
 cmake -G "CodeBlocks - Unix Makefiles" -B build-cygwin -S .
@@ -64,8 +64,8 @@ pushd build-cygwin; make; ./Hello; popd
 
 #### 方案二：[Mingw-w64](https://sourceforge.net/projects/mingw-w64/files/mingw-w64/)、[CMake](https://cmake.org/download/)（推荐）
 
->添加环境：`..\mingw-w64\x86_64-${version}-posix-seh-${subversion}\mingw64\bin`
->添加环境：`..\cmake\cmake-${version}-win64-x64\bin`
+>- 添加环境：`..\mingw-w64\x86_64-${version}-posix-seh-${subversion}\mingw64\bin`
+>- 添加环境：`..\cmake\cmake-${version}-win64-x64\bin`
 
 ```batch
 cmake -G "CodeBlocks - MinGW Makefiles" -B build-mingw -S .
