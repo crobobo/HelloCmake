@@ -1,0 +1,4 @@
+.idea/**
+!.idea/modules.xml
+!.idea/demo.iml
+cmake-build-*
